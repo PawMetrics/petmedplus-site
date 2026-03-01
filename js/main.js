@@ -17,10 +17,15 @@
     try {
       var email = atob(parts[0]);
       link.href = "mailto:" + email;
-      link.textContent = email;
+      // Preserve "Send an Email" label if link has children (e.g. icon + text)
+      if (!link.querySelector("svg")) {
+        link.textContent = email;
+      }
     } catch (e) {
-      link.textContent = "team@wsogmm.com";
       link.href = "mailto:team@wsogmm.com";
+      if (!link.querySelector("svg")) {
+        link.textContent = "team@wsogmm.com";
+      }
     }
   }
 
